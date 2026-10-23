@@ -1,0 +1,16 @@
+[
+    {
+        "DisplayName": "Additional Arguments",
+        "Description": "Extra File Browser command line flags, e.g. --baseURL /files",
+        "Category": "File Browser:folder",
+        "Subcategory": "Server:dns:1",
+        "Keywords": "arguments,flags,baseurl",
+        "FieldName": "ExtraArgs",
+        "InputType": "text",
+        "IsFlagArgument": false,
+        "ParamFieldName": "ExtraArgs",
+        "IncludeInCommandLine": false,
+        "DefaultValue": "",
+        "EnumValues": {}
+    }
+]

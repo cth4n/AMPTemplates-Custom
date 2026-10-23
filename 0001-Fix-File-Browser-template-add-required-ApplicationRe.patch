@@ -1,0 +1,156 @@
+From 619b3e0f2168b97d72b7b9c5855613524de60481 Mon Sep 17 00:00:00 2001
+From: cth4n <ethan@yaacobi.co.in>
+Date: Thu, 22 Oct 2026 21:57:02 -0400
+Subject: [PATCH] Fix File Browser template: add required
+ ApplicationReadyMode/Console/Limits keys, non-empty config manifest, full
+ port schema
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01R4xyDkzqC3Gki1j4jYw33Y
+---
+ filebrowser.kvp        | 37 ++++++++++++++++++++++++++++++++++---
+ filebrowserconfig.json | 17 ++++++++++++++++-
+ filebrowserports.json  | 19 +++++++++++--------
+ filebrowserstart.json  | 16 ++++++++--------
+ 4 files changed, 69 insertions(+), 20 deletions(-)
+
+diff --git a/filebrowser.kvp b/filebrowser.kvp
+index c05b73e..aa9a1f3 100644
+--- a/filebrowser.kvp
++++ b/filebrowser.kvp
+@@ -3,7 +3,7 @@ Meta.Description=Web-based file manager for uploading and downloading files.
+ Meta.OS=Linux
+ Meta.AarchSupport=Unknown
+ Meta.Arch=x86_64
+-Meta.Author=Local
++Meta.Author=cth4n
+ Meta.URL=https://github.com/filebrowser/filebrowser
+ Meta.DisplayImageSource=
+ Meta.EndpointURIFormat=http://{ip}:{GenericModule.App.Ports.$WebPort}
+@@ -21,7 +21,7 @@ Meta.Prerequisites=[]
+ Meta.ExtraContainerPackages=[]
+ Meta.ConfigReleaseState=NotSpecified
+ Meta.NoCommercialUsage=False
+-Meta.ConfigVersion=1
++Meta.ConfigVersion=2
+ Meta.ReleaseNotes=Initial local template
+ Meta.BreakingReleaseNotes=
+ Meta.AppConfigId=9c1e3eae-37b8-40b4-8f34-d699f4a24ab2
+@@ -36,7 +36,7 @@ App.ExecutableLinux=filebrowser
+ App.WorkingDir=
+ App.LinuxCommandLineArgs=
+ App.WindowsCommandLineArgs=
+-App.CommandLineArgs=--address 0.0.0.0 --port {{$WebPort}} --root ./files --database ./filebrowser.db
++App.CommandLineArgs=--address {{$ApplicationIPBinding}} --port {{$WebPort}} --root ./files --database ./filebrowser.db {{ExtraArgs}}
+ App.UseLinuxIOREDIR=False
+ App.AppSettings={}
+ App.EnvironmentVariables={}
+@@ -111,3 +111,34 @@ Limits.SleepDelayMinutes=5
+ Limits.DozeDelay=2
+ Limits.AutoRetryCount=2
+ Limits.SleepStartThresholdSeconds=25
++App.ForceUpdateReason=
++App.Compatibility=None
++App.SteamUpdateAnonymousLogin=True
++App.SteamForceLoginPrompt=False
++App.RapidStartup=False
++App.SmartExcludeExemptions=["*.db"]
++App.SmartExcludeSupported=False
++App.DumpFullChildProcessTree=False
++App.MonitorChildProcessName=
++App.MonitorDirectChildOnly=False
++App.SupportsUniversalSleep=False
++App.WakeupMode=Any
++App.ApplicationReadyMode=RegexMatch
++Console.FilterMatchRegex=^\d{4}/\d\d/\d\d \d\d:\d\d:\d\d 
++Console.FilterMatchReplacement=
++Console.ThrowawayMessageRegex=^NOTICE: .*$
++Console.AppReadyRegex=^Listening on .+$
++Console.UserJoinRegex=^$
++Console.UserLeaveRegex=^$
++Console.UserChatRegex=^$
++Console.UpdateAvailableRegex=^$
++Console.MetricsRegex=
++Console.SuppressLogAtStart=False
++Console.ActivateLogRegex=
++Console.UserActions={}
++Limits.SleepMode=False
++Limits.SleepOnStart=False
++Limits.SleepDelayMinutes=5
++Limits.DozeDelay=2
++Limits.AutoRetryCount=2
++Limits.SleepStartThresholdSeconds=25
+diff --git a/filebrowserconfig.json b/filebrowserconfig.json
+index fe51488..283ec4a 100644
+--- a/filebrowserconfig.json
++++ b/filebrowserconfig.json
+@@ -1 +1,16 @@
+-[]
++[
++    {
++        "DisplayName": "Additional Arguments",
++        "Description": "Extra File Browser command line flags, e.g. --baseURL /files",
++        "Category": "File Browser:folder",
++        "Subcategory": "Server:dns:1",
++        "Keywords": "arguments,flags,baseurl",
++        "FieldName": "ExtraArgs",
++        "InputType": "text",
++        "IsFlagArgument": false,
++        "ParamFieldName": "ExtraArgs",
++        "IncludeInCommandLine": false,
++        "DefaultValue": "",
++        "EnumValues": {}
++    }
++]
+diff --git a/filebrowserports.json b/filebrowserports.json
+index ee31790..9ce3d49 100644
+--- a/filebrowserports.json
++++ b/filebrowserports.json
+@@ -1,9 +1,12 @@
+ [
+-  {
+-    "Protocol": "TCP",
+-    "Port": 8085,
+-    "Ref": "WebPort",
+-    "Name": "Web UI Port",
+-    "Description": "HTTP port for File Browser"
+-  }
+-]
+\ No newline at end of file
++    {
++        "Protocol": "TCP",
++        "Port": 8085,
++        "Offset": 0,
++        "Range": 1,
++        "Ref": "WebPort",
++        "Name": "Web UI Port",
++        "Description": "HTTP port for the File Browser web interface",
++        "ChildPorts": null
++    }
++]
+diff --git a/filebrowserstart.json b/filebrowserstart.json
+index df46b9e..5cc8fb0 100644
+--- a/filebrowserstart.json
++++ b/filebrowserstart.json
+@@ -1,9 +1,9 @@
+ [
+-  {
+-    "UpdateStageName": "Create file storage",
+-    "UpdateSourcePlatform": "Linux",
+-    "UpdateSource": "CreateDirectory",
+-    "UpdateSourceArgs": "{{$FullBaseDir}}files",
+-    "SkipOnFailure": false
+-  }
+-]
+\ No newline at end of file
++    {
++        "UpdateStageName": "Create file storage directory",
++        "UpdateSourcePlatform": "Linux",
++        "UpdateSource": "CreateDirectory",
++        "UpdateSourceArgs": "{{$FullBaseDir}}files",
++        "SkipOnFailure": false
++    }
++]
+-- 
+2.43.0
+

@@ -1,9 +1,12 @@
 [
-  {
-    "Protocol": "TCP",
-    "Port": 8085,
-    "Ref": "WebPort",
-    "Name": "Web UI Port",
-    "Description": "HTTP port for File Browser"
-  }
+    {
+        "Protocol": "TCP",
+        "Port": 8085,
+        "Offset": 0,
+        "Range": 1,
+        "Ref": "WebPort",
+        "Name": "Web UI Port",
+        "Description": "HTTP port for the File Browser web interface",
+        "ChildPorts": null
+    }
 ]
