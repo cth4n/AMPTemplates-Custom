@@ -1,7 +1,7 @@
 Meta.DisplayName=File Browser
 Meta.Description=Web-based file manager for uploading and downloading files.
 Meta.OS=Linux
-Meta.AarchSupport=Native
+Meta.AarchSupport=Unknown
 Meta.Arch=x86_64
 Meta.Author=Local
 Meta.URL=https://github.com/filebrowser/filebrowser
@@ -14,7 +14,7 @@ Meta.MinAMPVersion=2.6.5.2
 Meta.SpecificDockerImage=cubecoders/ampbase:debian
 Meta.DockerRequired=False
 Meta.DockerBaseReadOnly=False
-Meta.ContainerPolicy=Supported
+Meta.ContainerPolicy=RecommendedOnLinux
 Meta.ContainerPolicyReason=
 Meta.ExtraSetupStepsURI=
 Meta.Prerequisites=[]
