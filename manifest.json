@@ -1,0 +1,11 @@
+{
+  "id": "522d6f8d-e2fc-423c-9f99-912ef54fc40e",
+  "authors": [
+    "Private AMP Template"
+  ],
+  "origin": "https://github.com/YOUR_GITHUB_USERNAME/AMPTemplates-Custom.git",
+  "url": "https://github.com/YOUR_GITHUB_USERNAME/AMPTemplates-Custom",
+  "imagefile": "",
+  "prefix": "CUSTOM",
+  "repotype": "AppTemplates"
+}

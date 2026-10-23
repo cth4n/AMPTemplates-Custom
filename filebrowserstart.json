@@ -1,0 +1,9 @@
+[
+  {
+    "UpdateStageName": "Create file storage",
+    "UpdateSourcePlatform": "Linux",
+    "UpdateSource": "CreateDirectory",
+    "UpdateSourceArgs": "{{$FullBaseDir}}files",
+    "SkipOnFailure": false
+  }
+]

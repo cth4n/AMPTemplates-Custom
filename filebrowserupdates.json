@@ -1,0 +1,21 @@
+[
+  {
+    "UpdateStageName": "Download File Browser v2.63.23",
+    "UpdateSourcePlatform": "Linux",
+    "UpdateSourceArch": "x86_64",
+    "UpdateSource": "FetchURL",
+    "UpdateSourceData": "https://github.com/filebrowser/filebrowser/releases/download/v2.63.23/linux-amd64-filebrowser.tar.gz",
+    "UpdateSourceTarget": "{{$FullBaseDir}}",
+    "UnzipUpdateSource": true,
+    "OverwriteExistingFiles": true,
+    "DeleteAfterExtract": true,
+    "SkipOnFailure": false
+  },
+  {
+    "UpdateStageName": "Set File Browser executable",
+    "UpdateSourcePlatform": "Linux",
+    "UpdateSource": "SetExecutableFlag",
+    "UpdateSourceArgs": "{{$FullBaseDir}}filebrowser",
+    "SkipOnFailure": false
+  }
+]
